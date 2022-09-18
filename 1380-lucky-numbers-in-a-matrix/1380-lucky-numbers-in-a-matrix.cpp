@@ -7,35 +7,33 @@ class Solution
             int col = matrix[0].size();
 
             vector<int> ans;
+            int min_index = 0;
 
             for (int i = 0; i < row; i++)
             {
-                int Min = INT_MAX;
-                int min_index = 0;
+                int mini = INT_MAX;
 
                 for (int j = 0; j < col; j++)
                 {
-                    if (Min > matrix[i][j])
+                    if (mini > matrix[i][j])
                     {
-                        Min = matrix[i][j];
+                        mini = matrix[i][j];
                         min_index = j;
                     }
                 }
-
-                bool istrue = true;
+                int maxi = INT_MIN;
 
                 for (int j = 0; j < row; j++)
                 {
-                    if (matrix[i][min_index] < matrix[j][min_index])
+                    if (maxi < matrix[j][min_index])
                     {
-                        istrue = false;
-                        break;
+                        maxi = matrix[j][min_index];
                     }
                 }
 
-                if (istrue == true)
+                if (maxi == mini)
                 {
-                    ans.push_back(matrix[i][min_index]);
+                    ans.push_back(maxi);
                 }
             }
             return ans;
