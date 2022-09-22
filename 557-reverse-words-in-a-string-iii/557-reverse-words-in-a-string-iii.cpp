@@ -4,7 +4,7 @@ class Solution
         string reverseWords(string s)
         {
             int i = 0;
-            for (int j = 0; j < s.size(); ++j)
+            for (int j = 0; j < s.size(); j++)
             {
                 if (s[j] == ' ')
                 {
