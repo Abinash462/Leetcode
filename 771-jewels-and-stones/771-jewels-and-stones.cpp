@@ -5,6 +5,7 @@ class Solution
         {
             unordered_map<char, int> ans;
             int count = 0;
+
             for (char c: stones)
             {
                 ans[c]++;
