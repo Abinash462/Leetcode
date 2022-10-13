@@ -7,8 +7,8 @@ class Solution
             int col = matrix[0].size();
 
             vector<int> ans;
-
             int min_index = 0;
+
             for (int i = 0; i < row; i++)
             {
                 int mini = INT_MAX;
@@ -20,21 +20,19 @@ class Solution
                         min_index = j;
                     }
                 }
-                int maxi = INT_MIN;
 
+                int maxi = INT_MIN;
                 for (int j = 0; j < row; j++)
                 {
-                    
                     if (maxi < matrix[j][min_index])
                     {
                         maxi = matrix[j][min_index];
                     }
-                   
                 }
-                 if (maxi == mini)
-                    {
-                        ans.push_back(maxi);
-                    }
+                if (maxi == mini)
+                {
+                    ans.push_back(maxi);
+                }
             }
             return ans;
         }
