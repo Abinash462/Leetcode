@@ -1,31 +1,65 @@
-class MyHashSet {
-public:
-    
-    vector<int> ans;
+class MyHashSet
+{
+    public:
+
+        vector<list < int>> ans;
     int size;
-    
-    MyHashSet() {
-        size=1e6+1;
+
+    MyHashSet()
+    {
+        size = 1e6 + 1;
         ans.resize(size);
     }
-    
-    void add(int key) {
-        ans[key]=1;
+
+    int hash(int key)
+    {
+        return key % size;
     }
-    
-    void remove(int key) {
-        ans[key]=0;
+
+    list<int>::iterator search(int key)
+    {
+        int i = hash(key);
+        return find(ans[i].begin(), ans[i].end(), key);
     }
-    
-    bool contains(int key) {
-        return ans[key];
+
+    void add(int key)
+    {
+        int i = hash(key);
+        if (contains(key))
+        {
+            return;
+        }
+        ans[i].push_back(key);
+    }
+
+    void remove(int key)
+    {
+        int i = hash(key);
+        if (contains(key) == false)
+        {
+            return;
+        }
+        ans[i].erase(search(key));
+    }
+
+    bool contains(int key)
+    {
+        int i = hash(key);
+        if (search(key) != ans[i].end())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 };
 
 /**
- * Your MyHashSet object will be instantiated and called as such:
- * MyHashSet* obj = new MyHashSet();
- * obj->add(key);
- * obj->remove(key);
- * bool param_3 = obj->contains(key);
+ *Your MyHashSet object will be instantiated and called as such:
+ *MyHashSet* obj = new MyHashSet();
+ *obj->add(key);
+ *obj->remove(key);
+ *bool param_3 = obj->contains(key);
  */
