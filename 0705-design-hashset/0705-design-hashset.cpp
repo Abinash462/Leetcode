@@ -4,10 +4,9 @@ class MyHashSet
 
         vector<list < int>> ans;
     int size;
-
     MyHashSet()
     {
-        size = 1e6 + 1;
+        size = 100;
         ans.resize(size);
     }
 
