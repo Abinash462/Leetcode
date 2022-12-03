@@ -11,6 +11,7 @@
 class Solution
 {
     public:
+
         void reverse(ListNode *start, ListNode *end)
         {
             ListNode *prev = NULL;
@@ -30,28 +31,37 @@ class Solution
         }
     ListNode* reverseKGroup(ListNode *head, int k)
     {
-
         if (head == NULL || head->next == NULL || k == 1)
         {
             return head;
         }
-        ListNode *start = head;
-        ListNode *end = head;
 
-        int increment = k - 1;
-        while (increment--)
+        ListNode *end = head;
+        ListNode *dummy = new ListNode(-1);
+        dummy->next = head;
+        ListNode *beforestart = dummy;
+        int i = 0;
+
+        while (end != NULL)
         {
-            end = end->next;
-            if (end == NULL)
+            i++;
+            if (i % k == 0)
             {
-                return head;
+                ListNode *start = beforestart->next;
+                ListNode *temp = end->next;
+
+                reverse(start, end);
+                beforestart->next = end;
+                start->next = temp;
+
+                beforestart = start;
+                end = temp;
+            }
+            else
+            {
+                end = end->next;
             }
         }
-
-        ListNode *nexthead = reverseKGroup(end->next, k);
-        reverse(start, end);
-
-        start->next = nexthead;
-        return end;
+        return dummy->next;
     }
 };
