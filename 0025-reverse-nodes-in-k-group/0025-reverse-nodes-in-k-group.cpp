@@ -1,11 +1,11 @@
 /**
  *Definition for singly-linked list.
  *struct ListNode {
- *    int val;
- *    ListNode * next;
- *    ListNode() : val(0), next(nullptr) {}
- *    ListNode(int x) : val(x), next(nullptr) {}
- *    ListNode(int x, ListNode *next) : val(x), next(next) {}
+ *   int val;
+ *   ListNode * next;
+ *   ListNode() : val(0), next(nullptr) {}
+ *   ListNode(int x) : val(x), next(nullptr) {}
+ *   ListNode(int x, ListNode *next) : val(x), next(next) {}
  *};
  */
 class Solution
@@ -36,21 +36,33 @@ class Solution
         {
             return head;
         }
-        int inc = k - 1;
-        ListNode *start = head;
+        ListNode *dummy = new ListNode(-1);
+        dummy->next = head;
+        ListNode *beforestart = dummy;
         ListNode *end = head;
+        int i = 0;
 
-        while (inc--)
+        while (end != NULL)
         {
-            end = end->next;
-            if (end == NULL)
+            i++;
+            if (i % k == 0)
             {
-                return head;
+                ListNode *start = beforestart->next;
+                ListNode *temp = end->next;
+
+                reverse(start, end);
+
+                beforestart->next = end;
+                start->next = temp;
+
+                beforestart = start;
+                end = temp;
+            }
+            else
+            {
+                end = end->next;
             }
         }
-        ListNode *nexthead = reverseKGroup(end->next, k);
-        reverse(start, end);
-        start->next = nexthead;
-        return end;
+        return dummy->next;
     }
 };
