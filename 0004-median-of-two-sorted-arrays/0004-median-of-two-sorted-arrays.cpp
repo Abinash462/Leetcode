@@ -7,7 +7,6 @@ class Solution
             {
                 return findMedianSortedArrays(nums2, nums1);
             }
-
             int n1 = nums1.size();
             int n2 = nums2.size();
 
