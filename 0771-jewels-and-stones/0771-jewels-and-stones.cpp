@@ -4,14 +4,14 @@ class Solution
         int numJewelsInStones(string jewels, string stones)
         {
             unordered_map<int, int> ans;
-            int count = 0;
 
-            for (char c: stones)
+            for (char c: jewels)
             {
                 ans[c]++;
             }
+            int count = 0;
 
-            for (char c: jewels)
+            for (char c: stones)
             {
                 if (ans.count(c))
                 {
