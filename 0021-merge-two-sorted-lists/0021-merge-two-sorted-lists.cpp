@@ -1,11 +1,11 @@
 /**
  *Definition for singly-linked list.
  *struct ListNode {
- *    int val;
- *    ListNode * next;
- *    ListNode() : val(0), next(nullptr) {}
- *    ListNode(int x) : val(x), next(nullptr) {}
- *    ListNode(int x, ListNode *next) : val(x), next(next) {}
+ *   int val;
+ *   ListNode * next;
+ *   ListNode() : val(0), next(nullptr) {}
+ *   ListNode(int x) : val(x), next(nullptr) {}
+ *   ListNode(int x, ListNode *next) : val(x), next(next) {}
  *};
  */
 class Solution
@@ -22,8 +22,21 @@ class Solution
                 return list1;
             }
 
-            ListNode *ans = new ListNode(-1);
-            ListNode *tail = ans;
+            ListNode * ans;
+            ListNode * tail;
+
+            if (list1->val < list2->val)
+            {
+                ans = list1;
+                tail = list1;
+                list1 = list1->next;
+            }
+            else
+            {
+                ans = list2;
+                tail = list2;
+                list2 = list2->next;
+            }
 
             while (list1 != NULL && list2 != NULL)
             {
@@ -48,6 +61,6 @@ class Solution
             {
                 tail->next = list1;
             }
-            return ans->next;
+            return ans;
         }
 };
