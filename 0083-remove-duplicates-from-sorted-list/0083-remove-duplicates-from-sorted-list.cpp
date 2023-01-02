@@ -17,15 +17,21 @@ class Solution
             {
                 return head;
             }
-            ListNode *nexthead = deleteDuplicates(head->next);
-            if (head->val == nexthead->val)
+            ListNode *temp = head;
+
+            while (temp->next != NULL)
             {
-                return nexthead;
+                if (temp->val == temp->next->val)
+                {
+                    ListNode *del = temp->next;
+                    temp->next = del->next;
+                    delete del;
+                }
+                else
+                {
+                    temp = temp->next;
+                }
             }
-            else
-            {
-                head->next = nexthead;
-                return head;
-            }
+            return head;
         }
 };
