@@ -1,11 +1,11 @@
 /**
  *Definition for singly-linked list.
  *struct ListNode {
- *   int val;
- *   ListNode * next;
- *   ListNode() : val(0), next(nullptr) {}
- *   ListNode(int x) : val(x), next(nullptr) {}
- *   ListNode(int x, ListNode *next) : val(x), next(next) {}
+ *  int val;
+ *  ListNode * next;
+ *  ListNode() : val(0), next(nullptr) {}
+ *  ListNode(int x) : val(x), next(nullptr) {}
+ *  ListNode(int x, ListNode *next) : val(x), next(next) {}
  *};
  */
 class Solution
@@ -19,23 +19,15 @@ class Solution
                 return NULL;
             }
 
-            ListNode *dummy = new ListNode(-1);
-            dummy->next = head;
-            ListNode *beforestart = dummy;
-
-            while (beforestart->next != NULL)
+            head->next = removeElements(head->next, val);
+            if (head->val == val)
             {
-                if (beforestart->next->val == val)
-                {
-                    ListNode *del = beforestart->next;
-                    beforestart->next = del->next;
-                    delete del;
-                }
-                else
-                {
-                    beforestart = beforestart->next;
-                }
+                ListNode *ans = head->next;
+                return ans;
             }
-            return dummy->next;
+            else
+            {
+                return head;
+            }
         }
 };
