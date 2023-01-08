@@ -3,17 +3,32 @@ class Solution
     public:
         int maxIceCream(vector<int> &costs, int coins)
         {
-            sort(costs.begin(), costs.end());
-            int count = 0;
+            int m = *max_element(costs.begin(), costs.end());
+            vector<int> freq(m + 1, 0);
 
-            for (int i = 0; i < costs.size(); i++)
+            for (auto x: costs)
             {
-                if (coins - costs[i] >= 0)
+                freq[x]++;
+            }
+
+            int ans = 0;
+            for (int i = 1; i <= m; i++)
+            {
+                if (freq[i] == 0)
                 {
-                    count++;
-                    coins -= costs[i];
+                    continue;
+                }
+                if (i > coins)
+                {
+                    break;
+                }
+                else
+                {
+                    int usedcoins = min(freq[i], coins / i);
+                    coins -= i * usedcoins;
+                    ans += usedcoins;
                 }
             }
-            return count;
+            return ans;
         }
 };
